@@ -1,0 +1,161 @@
+<div class="form-wrapper">
+  <div class="form-container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="accountForm">
+      <div class="form-head space-between">
+        <span class="app-logo"></span>
+        <span class="form-name">Create Account</span>
+      </div>
+
+      <div class="mb-3">
+        <label class="required" for="firstName">First Name</label>
+        <input
+          class="form-control"
+          type="text"
+          id="firstName"
+          placeholder="Enter your first name"
+          formControlName="firstName"
+          [class.invalid]="
+            formControls.firstName.invalid && formControls.firstName.touched
+          "
+        />
+
+        <div
+          *ngIf="
+            formControls.firstName.invalid && formControls.firstName.touched
+          "
+        >
+          <span
+            *ngIf="formControls.firstName.errors.required"
+            class="text-danger"
+            >Please enter your first name</span
+          >
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="required" for="lastName">Last Name</label>
+        <input
+          class="form-control"
+          type="text"
+          id="lastName"
+          placeholder="Enter your first name"
+          formControlName="lastName"
+          [class.invalid]="
+            formControls.lastName.invalid && formControls.lastName.touched
+          "
+        />
+
+        <div
+          *ngIf="formControls.lastName.invalid && formControls.lastName.touched"
+        >
+          <span
+            *ngIf="formControls.lastName.errors.required"
+            class="text-danger"
+            >Please enter your last name</span
+          >
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="required" for="password">Master Password</label>
+        <div class="d-flex align-items-center">
+          <input
+            class="form-control"
+            type="{{ isPasswordVisible ? 'text' : 'password' }}"
+            id="password"
+            maxlength="32"
+            placeholder="Enter your master password"
+            formControlName="password"
+            (focus)="isPasswordTooltipVisible = true"
+            (blur)="isPasswordTooltipVisible = false"
+            [class.invalid]="
+              formControls.password.invalid && formControls.password.touched
+            "
+          />
+
+          <mat-icon
+            class="visibility-toggler"
+            (click)="isPasswordVisible = !isPasswordVisible"
+          >
+            {{ isPasswordVisible ? "visibility_off" : "visibility" }}</mat-icon
+          >
+        </div>
+
+        <div *ngIf="isPasswordTooltipVisible" class="password-tooltip">
+          <span>Password must:</span>
+          <ul>
+            <li>Have at least 1 number</li>
+            <li>Have at least 8 characters</li>
+            <li>Have at least 1 special character</li>
+            <li>Include both uppercase and lowercase characters</li>
+          </ul>
+        </div>
+
+        <div
+          *ngIf="formControls.password.invalid && formControls.password.touched"
+        >
+          <span
+            *ngIf="formControls.password.errors.required"
+            class="text-danger"
+            >Master password is required</span
+          >
+          <span *ngIf="formControls.password.errors.pattern" class="text-danger"
+            >Password doesn't match all requirements</span
+          >
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="required" for="confirmPassword">Confirm Password</label>
+        <div class="d-flex align-items-center">
+          <input
+            class="form-control"
+            type="{{ isPasswordVisible ? 'text' : 'password' }}"
+            id="confirmPassword"
+            maxlength="32"
+            placeholder="Confirm your master password"
+            formControlName="confirmPassword"
+            [class.invalid]="
+              formControls.confirmPassword.invalid &&
+              formControls.confirmPassword.touched
+            "
+          />
+
+          <mat-icon
+            class="visibility-toggler"
+            (click)="isPasswordVisible = !isPasswordVisible"
+          >
+            {{ isPasswordVisible ? "visibility_off" : "visibility" }}</mat-icon
+          >
+        </div>
+
+        <div
+          *ngIf="
+            formControls.confirmPassword.invalid &&
+            formControls.confirmPassword.touched
+          "
+        >
+          <span
+            *ngIf="formControls.confirmPassword.errors.required"
+            class="text-danger"
+            >Please confirm master password</span
+          >
+        </div>
+        <span
+          class="text-danger"
+          *ngIf="accountForm.hasError('arePasswordsDifferent')"
+        >
+          Entered passwords does not match
+        </span>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="!accountForm.valid"
+        class="btn btn-primary w-100"
+      >
+        Continue
+      </button>
+    </form>
+  </div>
+</div>

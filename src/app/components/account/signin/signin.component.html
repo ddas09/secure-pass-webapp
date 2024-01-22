@@ -1,0 +1,82 @@
+<div class="form-wrapper">
+  <div class="form-container">
+    <form (ngSubmit)="signIn()" [formGroup]="signInForm">
+      <div class="form-head space-between">
+        <span class="app-logo"></span>
+        <span class="form-name">Vault Login</span>
+      </div>
+
+      <div class="mb-3">
+        <label class="required" for="email">Email Address</label>
+        <input
+          class="form-control"
+          type="email"
+          id="email"
+          placeholder="Enter your email address"
+          formControlName="email"
+          [class.invalid]="
+            formControls.email.invalid && formControls.email.touched
+          "
+        />
+
+        <div *ngIf="formControls.email.invalid && formControls.email.touched">
+          <span *ngIf="formControls.email.errors.required" class="text-danger"
+            >Email is required</span
+          >
+          <span *ngIf="formControls.email.errors.email" class="text-danger"
+            >Email is invalid
+          </span>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="required" for="password">Master Password</label>
+        <div class="d-flex align-items-center">
+          <input
+            class="form-control"
+            type="{{ isPasswordVisible ? 'text' : 'password' }}"
+            id="password"
+            maxlength="32"
+            placeholder="Enter your master password"
+            formControlName="password"
+            [class.invalid]="
+              formControls.password.invalid && formControls.password.touched
+            "
+          />
+
+          <mat-icon
+            class="visibility-toggler"
+            (click)="isPasswordVisible = !isPasswordVisible"
+          >
+            {{ isPasswordVisible ? "visibility_off" : "visibility" }}</mat-icon
+          >
+        </div>
+
+        <div
+          *ngIf="formControls.password.invalid && formControls.password.touched"
+        >
+          <span
+            *ngIf="formControls.password.errors.required"
+            class="text-danger"
+            >Master password is required</span
+          >
+        </div>
+
+        <a class="quick-link" routerLink="/recover-account">Forgot password?</a>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="!signInForm.valid"
+      >
+        Sign In
+      </button>
+    </form>
+
+    <div class="form-footer">
+      Don't have an account?
+      <a class="quick-link" routerLink="/signup">Sign Up</a>
+    </div>
+  </div>
+</div>

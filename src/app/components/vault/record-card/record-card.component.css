@@ -1,0 +1,25 @@
+::ng-deep .mat-card {
+    cursor: pointer;
+}
+
+::ng-deep .mat-card-header-text {
+    margin: 0 !important;
+}
+
+::ng-deep .mat-card-title {
+    margin-top: 10px;
+}
+
+::ng-deep .mat-card-content {
+    margin-top: 16px;
+    text-align: center;
+}
+
+::ng-deep .mat-card-header .mat-icon {
+    cursor: pointer;
+}
+
+.record-menu {
+    line-height: 0px !important;
+}
+
