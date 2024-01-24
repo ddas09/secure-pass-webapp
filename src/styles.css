@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.form-wrapper {
+  height: 100%;
+  background-image: url("./assets/form-bg.jpg");
+  background-size: cover;
+}
+
+.form-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  width: 75%;
+  max-width: 400px;
+  padding: 30px;
+  margin: auto;
+}
+
+.form-head {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.form-name {
+  color: black;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-info {
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+form label {
+  margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+  border: 1px solid #3082ee !important;
+}
+
+.invalid {
+  border: 1px solid red !important;
+}
+
+.form-footer {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.quick-link,
+.info {
+  text-decoration: none;
+  color: #1f76e7;
+}
+
+.required::after {
+  content: " *";
+  color: red;
+}
+
+.text-danger {
+  color: red;
+}
+
+.btn-dialog {
+  width: 48%;
+}
+.space-between {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.visibility-toggler {
+  margin-left: -35px;
+  cursor: pointer;
+  color: #73797e;
+}
+
+.password-tooltip {
+  z-index: 1;
+  font-size: 14px;
+  border-radius: 6px;
+  margin-top: 5px;
+  position: absolute;
+  right: 30px;
+  left: 30px;
+  padding: 10px 18px 0px;
+  background: #fff;
+  box-shadow: 0 2px 12px 0 rgb(35 35 51 / 50%);
+}
+
+.close-dialog {
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(97, 93, 93);
+}
+
+.close-dialog:hover {
+  color: black;
+}
+
+.dialog-head {
+  font-size: 18px;
+}

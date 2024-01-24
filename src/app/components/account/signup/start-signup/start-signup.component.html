@@ -1,0 +1,46 @@
+<div class="form-wrapper">
+  <div class="form-container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="signupForm">
+      <div class="form-head space-between">
+        <span class="app-logo"></span>
+        <span class="form-name">Sign Up</span>
+      </div>
+
+      <div class="mb-3">
+        <label class="required mb-2" for="email">Email Address</label>
+        <input
+          class="form-control"
+          type="email"
+          id="email"
+          placeholder="Enter your email address"
+          formControlName="email"
+          [class.invalid]="
+            formControls.email.invalid && formControls.email.touched
+          "
+        />
+
+        <div *ngIf="formControls.email.invalid && formControls.email.touched">
+          <span *ngIf="formControls.email.errors.required" class="text-danger"
+            >Please enter your email address</span
+          >
+          <span *ngIf="formControls.email.errors.email" class="text-danger"
+            >Please enter a valid email address</span
+          >
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="!signupForm.valid"
+        class="btn btn-primary w-100"
+      >
+        Sign Up
+      </button>
+    </form>
+
+    <div class="form-footer">
+      Already have an account?
+      <a class="quick-link" routerLink="/signin">Sign In</a>
+    </div>
+  </div>
+</div>

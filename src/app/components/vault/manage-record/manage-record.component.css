@@ -1,0 +1,12 @@
+::ng-deep .mat-dialog-title {
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.visibility-toggler {
+    margin-left: -60px !important;
+}
+
+.password-generator-icon {
+    cursor: pointer;
+}

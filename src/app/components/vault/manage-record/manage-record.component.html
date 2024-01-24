@@ -1,0 +1,90 @@
+<form (ngSubmit)="onFormSubmit()" [formGroup]="manageRecordForm">
+  <div class="form-head space-between">
+    <span>{{ dialogData.dialogTitle }}</span>
+    <mat-icon mat-dialog-close class="close-dialog">close</mat-icon>
+  </div>
+
+  <div class="mb-2">
+    <label class="required" for="title">Title</label>
+    <input
+      class="form-control"
+      type="text"
+      id="title"
+      placeholder="Enter record title"
+      formControlName="title"
+      autocomplete="off"
+    />
+  </div>
+
+  <div class="mb-2">
+    <label class="required" for="login">Login</label>
+    <input
+      class="form-control"
+      type="text"
+      id="login"
+      placeholder="Enter your login"
+      formControlName="login"
+      autocomplete="off"
+    />
+  </div>
+
+  <div class="mb-2">
+    <label class="required" for="password">Password</label>
+    <div class="d-flex align-items-center">
+      <input
+        class="form-control"
+        type="{{ isPasswordVisible ? 'text' : 'password' }}"
+        id="password"
+        maxlength="32"
+        placeholder="Enter your password"
+        formControlName="password"
+      />
+
+      <mat-icon
+        class="visibility-toggler"
+        (click)="isPasswordVisible = !isPasswordVisible"
+      >
+        {{ isPasswordVisible ? "visibility_off" : "visibility" }}
+      </mat-icon>
+      <mat-icon
+        class="password-generator-icon"
+        title="Generate Password"
+        (click)="generatePassword()"
+      >
+        casino
+      </mat-icon>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <label for="websiteUrl">Website Address</label>
+    <input
+      class="form-control"
+      type="text"
+      id="websiteUrl"
+      placeholder="https://"
+      formControlName="websiteUrl"
+      autocomplete="off"
+    />
+  </div>
+
+  <div class="mb-2">
+    <label for="note">Note</label>
+    <input
+      class="form-control"
+      type="text"
+      id="note"
+      placeholder="Add some note"
+      formControlName="note"
+      autocomplete="off"
+    />
+  </div>
+
+  <button
+    type="submit"
+    class="w-100 btn btn-success"
+    [disabled]="!manageRecordForm.valid"
+  >
+    Save
+  </button>
+</form>
