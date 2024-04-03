@@ -1,0 +1,50 @@
+<div class="form-wrapper">
+    <div class="form-container">
+        <form (ngSubmit)="onSubmit()" [formGroup]="recoveryForm">   
+            <div class="form-head space-between">
+                <span class="app-logo"></span>
+                <span class="form-name">Set Recovery</span>
+            </div>
+            
+            <div class="form-info">
+                Please enter a security question and answer it below. This will help 
+                you to recover your account if you forget your master password.
+            </div>
+            
+            <div class="mb-3">
+                <label class="required" for="securityQuestion">Security Question</label>
+                <input class="form-control" type="text" id="securityQuestion" autocomplete="off" placeholder="Enter a security question" 
+                formControlName="securityQuestion" [class.invalid]="formControls.securityQuestion.invalid && formControls.securityQuestion.touched">
+
+                <div *ngIf="formControls.securityQuestion.invalid && formControls.securityQuestion.touched">
+                    <span *ngIf="formControls.securityQuestion.errors.required" 
+                    class="text-danger">Security question is required</span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="required" for="securityAnswer">Security Answer</label>
+                <div class="d-flex align-items-center">
+                    <input class="form-control" id="securityAnswer" placeholder="Answer the security question"
+                    autocomplete="off" formControlName="securityAnswer"  type="{{ isAnswerVisible ? 'text' : 'password' }}" 
+                    [class.invalid]="formControls.securityAnswer.invalid && formControls.securityAnswer.touched">                 
+
+                    <mat-icon class="visibility-toggler" (click)="isAnswerVisible = !isAnswerVisible">
+                    {{ isAnswerVisible ? "visibility_off" : "visibility"}}</mat-icon>
+                </div>
+                
+                <div *ngIf="formControls.securityAnswer.invalid && formControls.securityAnswer.touched">
+                    <span *ngIf="formControls.securityAnswer.errors.required" 
+                    class="text-danger">Please answer the security question</span>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100" [disabled]="!recoveryForm.valid">Set Recovery</button>
+
+            <div class="form-footer">
+                Skip for now?
+                <a class="quick-link" routerLink="/signin">Go to login</a>
+            </div>
+        </form>
+    </div>
+</div>

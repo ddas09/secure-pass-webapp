@@ -1,0 +1,115 @@
+<app-navbar></app-navbar>
+
+<div class="vault-content">
+  <div class="accordion" id="record-acordion">
+    <div class="accordion-item mb-3">
+      <h2 class="accordion-header" id="my-records">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          My Records
+        </button>
+      </h2>
+
+      <div
+        id="collapseOne"
+        class="accordion-collapse collapse show"
+        aria-labelledby="my-records"
+        data-bs-parent="#record-acordion"
+      >
+        <div class="accordion-body">
+          <div fxLayout="row wrap" fxLayoutGap="20px grid">
+            <div
+              fxFlex="25%"
+              fxFlex.sm="49%"
+              fxFlex.xs="100%"
+              *ngFor="let record of recordContainer?.vaultRecords"
+            >
+              <app-record-card
+                [record]="record"
+                [isRecordShared]="record.isSharedRecord!"
+                [isVaultRecord]="true"
+                (viewButtonClickEvent)="viewRecord(record)"
+                (editButtonClickEvent)="editRecord(record)"
+                (sharingButtonClickEvent)="openShareRecordDialog(record)"
+                (deleteButtonClickEvent)="deleteRecord(record.id!, true)"
+              >
+              </app-record-card>
+            </div>
+          </div>
+
+          <div
+            class="text-danger text-center my-3"
+            *ngIf="!recordContainer?.vaultRecords?.length"
+          >
+            You don't have any records.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="shared-records">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
+          Shared Records
+        </button>
+      </h2>
+
+      <div
+        id="collapseTwo"
+        class="accordion-collapse collapse"
+        aria-labelledby="shared-records"
+        data-bs-parent="#record-acordion"
+      >
+        <div class="accordion-body">
+          <div fxLayout="row wrap" fxLayoutGap="20px grid">
+            <div
+              fxFlex="25%"
+              fxFlex.sm="49%"
+              fxFlex.xs="100%"
+              *ngFor="let record of recordContainer?.sharedRecords"
+            >
+              <app-record-card
+                [record]="record"
+                [isVaultRecord]="false"
+                (viewButtonClickEvent)="viewRecord(record)"
+                [isRecordShared]="record.isSharedRecord!"
+                (deleteButtonClickEvent)="deleteRecord(record.id!, false)"
+              >
+              </app-record-card>
+            </div>
+          </div>
+
+          <div
+            class="text-danger text-center my-3"
+            *ngIf="!recordContainer?.sharedRecords?.length"
+          >
+            You don't have any shared records.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button
+  (click)="onAddButtonClick()"
+  class="btn-add-record"
+  title="Add new item"
+  mat-mini-fab
+  color="warn"
+>
+  <mat-icon>add</mat-icon>
+</button>

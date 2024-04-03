@@ -1,0 +1,42 @@
+<form (ngSubmit)="onFormSubmit()" [formGroup]="shareRecordForm">
+  <div class="form-head space-between">
+    <span>Add Users</span>
+    <mat-icon mat-dialog-close class="close-dialog">close</mat-icon>
+  </div>
+
+  <div class="input-group mb-3">
+    <input
+      class="form-control"
+      list="recipients"
+      placeholder="Enter email address"
+      formControlName="email"
+    />
+    <datalist id="recipients">
+      <option *ngFor="let recipient of recipients">
+        {{ recipient.email }}
+      </option>
+    </datalist>
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="!shareRecordForm.valid"
+    >
+      Share
+    </button>
+  </div>
+
+  <div class="user-container">
+    <div class="space-between user-heading">
+      <span>User</span>
+      <span>Permission</span>
+    </div>
+
+    <div *ngFor="let user of recordUsers">
+      <div class="space-between my-1">
+        <span>{{ user.email }}</span>
+        <span>{{ user.permission }}</span>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+</form>

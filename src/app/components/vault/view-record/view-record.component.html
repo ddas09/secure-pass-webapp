@@ -1,0 +1,49 @@
+<div>
+  <div class="dialog-head space-between">
+    <span>{{ record.title }}</span>
+    <mat-icon mat-dialog-close class="close-dialog">close</mat-icon>
+  </div>
+
+  <div *ngIf="record.isSharedRecord" class="mb-3">
+    <label class="record-label">Owner</label>
+    <div class="form-control">{{ record.ownerName }}</div>
+  </div>
+
+  <div class="mb-3">
+    <label class="record-label">Title</label>
+    <div class="form-control">{{ record.title }}</div>
+  </div>
+
+  <div class="mb-3">
+    <label class="record-label">Login</label>
+    <div class="form-control">{{ record.login }}</div>
+  </div>
+
+  <div class="mb-3">
+    <label class="record-label">Password</label>
+    <div class="d-flex align-items-center">
+      <input
+        class="form-control password-field"
+        type="{{ isPasswordVisible ? 'text' : 'password' }}"
+        value="{{ record.password }}"
+        disabled
+      />
+      <mat-icon
+        class="visibility-toggler"
+        (click)="isPasswordVisible = !isPasswordVisible"
+      >
+        {{ isPasswordVisible ? "visibility_off" : "visibility" }}</mat-icon
+      >
+    </div>
+  </div>
+
+  <div *ngIf="record.websiteUrl" class="mb-3">
+    <label class="record-label">Website</label>
+    <div class="form-control">{{ record.websiteUrl }}</div>
+  </div>
+
+  <div *ngIf="record.notes">
+    <label class="record-label">Note</label>
+    <div class="form-control">{{ record.notes }}</div>
+  </div>
+</div>

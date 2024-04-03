@@ -1,0 +1,27 @@
+.btn-add-record {
+    position: fixed;
+    right: 20px;
+    bottom: 40px;
+}
+
+.accordion-button {
+    color: #fff;
+    background-color: #0096d5;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.vault-content {
+    padding: 25px 20px;
+}
+
+.accordion-button::after {
+    background-color: #fff;
+}
+
+::ng-deep .mat-card:hover {
+    transform: scale(1.05);
+    transition: transform .4s;
+}
