@@ -12,6 +12,10 @@ import { ConfirmationDialogComponent } from '../../components/shared/confirmatio
 export class DialogService {
   constructor(private dialog: MatDialog) {}
 
+  closeAllDialog() {
+    this.dialog.closeAll();
+  }
+
   getConfirmation(dialogContent: string) {
     let dialogReference = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: true,

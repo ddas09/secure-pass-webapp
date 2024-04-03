@@ -1,8 +1,8 @@
 import { Record } from '../../../models/record.model';
+import { Recipient } from '../../../models/user.model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppConstants } from '../../../constants/app.constants';
-import { RecordUser, Recipient } from '../../../models/user.model';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { RecordDialogData } from '../../../models/dialog-data.model';
 import { RecordService } from '../../../services/record/record.service';
@@ -19,7 +19,7 @@ export class ShareRecordComponent implements OnInit {
   shareRecordForm!: FormGroup;
 
   recipients: Recipient[] = [];
-  recordUsers: RecordUser[] = [];
+  recordRecipients: Recipient[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,6 +32,7 @@ export class ShareRecordComponent implements OnInit {
   ngOnInit(): void {
     this.record = this.dialogData.record as Record;
     this.getAllUsers();
+    this.getRecordRecipients();
     this.createShareRecordForm();
   }
 
@@ -39,6 +40,14 @@ export class ShareRecordComponent implements OnInit {
     this.accountService.getAllUsers().subscribe((response: any) => {
       this.recipients = response.data;
     });
+  }
+
+  getRecordRecipients() {
+    this.recordService
+      .getRecordRecipients(this.record.id!)
+      .subscribe((response: any) => {
+        this.recordRecipients = response.data;
+      });
   }
 
   createShareRecordForm(): void {
@@ -60,13 +69,24 @@ export class ShareRecordComponent implements OnInit {
     }
 
     this.recordService.shareRecord(this.record, recipient).subscribe(() => {
-      let recordUser: RecordUser = {
+      let recordRecipient: Recipient = {
         id: recipient?.id as number,
+        name: recipient?.name as string,
         email: recipient?.email as string,
-        permission: AppConstants.permissions.readonly,
       };
 
-      this.recordUsers.push(recordUser);
+      this.shareRecordForm.reset();
+      this.recordRecipients.push(recordRecipient);
     });
+  }
+
+  revokeRecipientAccess(recipientId: number) {
+    this.recordService
+      .revokeRecipientAccess(recipientId, this.record.id!)
+      .subscribe(() => {
+        this.recordRecipients = this.recordRecipients.filter(
+          (r) => r.id !== recipientId
+        );
+      });
   }
 }

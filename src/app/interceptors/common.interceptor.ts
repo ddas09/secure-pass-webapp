@@ -14,6 +14,7 @@ import {
 } from '@angular/common/http';
 import { HttpClientService } from '../services/http-client/http-client.service';
 import { AccountService } from '../services/account/account.service';
+import { DialogService } from '../services/dialog/dialog.service';
 
 @Injectable()
 export class CommonInterceptor implements HttpInterceptor {
@@ -23,9 +24,10 @@ export class CommonInterceptor implements HttpInterceptor {
   );
 
   constructor(
-    private accountService: AccountService,
+    private dialogService: DialogService,
     private loaderService: LoaderService,
     private storageService: StorageService,
+    private accountService: AccountService,
     private httpClientService: HttpClientService,
     private notificationService: NotificationService
   ) {}
@@ -58,10 +60,9 @@ export class CommonInterceptor implements HttpInterceptor {
         return respone;
       }),
       catchError((error: HttpErrorResponse) => {
-        console.log(error);
         this.loaderService.hide();
 
-        switch (error.error.status) {
+        switch (error.error?.status) {
           case AppConstants.responseStatuses.invalidAccessToken:
             return this.handleAccessTokenExpiration(request, next);
 
@@ -73,7 +74,7 @@ export class CommonInterceptor implements HttpInterceptor {
             return this.requireSignIn(error);
         }
 
-        if (error.error.message)
+        if (error.error?.message)
           this.notificationService.error(error.error.message);
         else
           this.notificationService.error(
@@ -126,6 +127,7 @@ export class CommonInterceptor implements HttpInterceptor {
   }
 
   requireSignIn(error: HttpErrorResponse) {
+    this.dialogService.closeAllDialog();
     this.accountService.requireSignIn();
     this.notificationService.Info(
       AppConstants.notificationMessages.signinRequired

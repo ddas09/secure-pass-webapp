@@ -28,13 +28,21 @@
   <div class="user-container">
     <div class="space-between user-heading">
       <span>User</span>
-      <span>Permission</span>
+      <span>Action</span>
     </div>
 
-    <div *ngFor="let user of recordUsers">
-      <div class="space-between my-1">
-        <span>{{ user.email }}</span>
-        <span>{{ user.permission }}</span>
+    <div *ngFor="let recipient of recordRecipients">
+      <div class="space-between align-items-center">
+        <span>{{ recipient.name }} ({{ recipient.email }})</span>
+        <button
+          mat-icon-button
+          color="warn"
+          aria-label="Delete"
+          type="button"
+          (click)="revokeRecipientAccess(recipient.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
       <mat-divider></mat-divider>
     </div>

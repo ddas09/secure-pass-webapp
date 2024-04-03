@@ -213,13 +213,25 @@ export class RecordService {
       recipientId: recipient.id,
       encryptionKey: this.cryptographyService.rsaEncrypt(
         record.encryptionKey!,
-        recipient.rsaPublicKey
+        recipient.rsaPublicKey!
       ),
     };
 
     return this.httpClientService.post(
       AppConstants.vaultEndpoints.shareRecord(sharedRecord.recordId),
       sharedRecord
+    );
+  }
+
+  getRecordRecipients(recordId: number) {
+    return this.httpClientService.get(
+      AppConstants.vaultEndpoints.recordRecipients(recordId)
+    );
+  }
+
+  revokeRecipientAccess(recipientId: number, recordId: number) {
+    return this.httpClientService.delete(
+      AppConstants.vaultEndpoints.revokeRecipientAccess(recipientId, recordId)
     );
   }
 }

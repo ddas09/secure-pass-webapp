@@ -17,6 +17,10 @@ export class AppConstants {
     shareRecord: (recordId: number) => `vault/records/${recordId}/share`,
     unshareRecord: (sharedRecordId: number) =>
       `vault/records/unshare/${sharedRecordId}`,
+    recordRecipients: (recordId: number) =>
+      `vault/records/${recordId}/recipients`,
+    revokeRecipientAccess: (recipientId: number, recordId: number) =>
+      `vault/records/${recordId}/recipients/${recipientId}/revoke`,
   };
 
   static vaultUrls = {
@@ -105,7 +109,7 @@ export class AppConstants {
     initiateRecovery: 'Enter your email to start the recovery process.',
     accountDoesNotExist: 'User account with this email does not exist.',
     loggedIn: 'Already logged In.',
-    networkError: 'Network Connection Failed. Please Retry.',
+    networkError: 'Something bad happened. Please try again later.',
   };
 
   static userEmail = 'user-email';
@@ -113,10 +117,6 @@ export class AppConstants {
   static securityQuestion = 'security-question';
 
   static registeredUser = 'registered-user';
-
-  static permissions = {
-    readonly: 'Read Only',
-  };
 
   static loaderMessages = {
     signup: 'Signing you up',

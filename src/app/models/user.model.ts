@@ -28,11 +28,5 @@ export interface Recipient {
   id: number;
   name: string;
   email: string;
-  rsaPublicKey: string;
-}
-
-export interface RecordUser {
-  id: number;
-  email: string;
-  permission: string;
+  rsaPublicKey?: string;
 }
