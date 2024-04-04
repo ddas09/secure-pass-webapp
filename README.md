@@ -14,7 +14,7 @@ SecurePass is designed to help users securely store and manage their passwords. 
 - **Intuitive User Interface**: User-friendly interface for easy navigation and usage.
 
 ## Demo
-https://github.com/ddas09/secure-pass-webapp/assets/75975903/0d9847a3-6621-45f7-a62c-33ebd64bf4df
+https://github.com/ddas09/secure-pass-webapp/assets/75975903/9b1933a9-b269-4dfa-a876-2f41cec722f1
 
 ## Getting Started
 
