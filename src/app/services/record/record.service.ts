@@ -40,11 +40,11 @@ export class RecordService {
         encryptionKey
       ),
       websiteUrl:
-        record.websiteUrl.trim() !== AppConstants.emptyString
+        record.websiteUrl?.trim() !== AppConstants.emptyString
           ? this.cryptographyService.encrypt(record.websiteUrl, encryptionKey)
           : AppConstants.emptyString,
       notes:
-        record.notes.trim() !== AppConstants.emptyString
+        record.notes?.trim() !== AppConstants.emptyString
           ? this.cryptographyService.encrypt(record.notes, encryptionKey)
           : AppConstants.emptyString,
       encryptionKey: this.cryptographyService.encrypt(
