@@ -13,6 +13,9 @@ SecurePass is designed to help users securely store and manage their passwords. 
 - **Password Revocation**: Revoke access to shared passwords when necessary.
 - **Intuitive User Interface**: User-friendly interface for easy navigation and usage.
 
+## Demo
+https://github.com/ddas09/secure-pass-webapp/assets/75975903/0d9847a3-6621-45f7-a62c-33ebd64bf4df
+
 ## Getting Started
 
 These instructions will get you a copy of the frontend project up and running on your local machine for development and testing purposes.
